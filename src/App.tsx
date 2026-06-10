@@ -1,56 +1,78 @@
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
-import { Home, Briefcase, BookOpen, Users, Scale } from 'lucide-react'
+import { Home, Briefcase, BookOpen, Users, Scale, Menu, X, Link2 } from 'lucide-react'
+import { HomePage, JobsPage, ResourcesPage, CommunityPage, LegalPage } from './pages'
 
 const nav = [
-  { to: '/',         label: 'Home',       Icon: Home },
-  { to: '/jobs',     label: 'Jobs',       Icon: Briefcase },
-  { to: '/resources',label: 'Resources',  Icon: BookOpen },
-  { to: '/community',label: 'Community',  Icon: Users },
-  { to: '/legal',    label: 'Legal',      Icon: Scale },
+  { to: '/', label: 'Home', Icon: Home },
+  { to: '/jobs', label: 'Jobs', Icon: Briefcase },
+  { to: '/resources', label: 'Resources', Icon: BookOpen },
+  { to: '/community', label: 'Community', Icon: Users },
+  { to: '/legal', label: 'Legal', Icon: Scale },
 ]
 
-function Placeholder({ title }: { title: string }) {
+function Nav() {
+  const [open, setOpen] = useState(false)
   return (
-    <main style={{ padding: '2rem', maxWidth: 640, margin: '0 auto' }}>
-      <h1 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '0.5rem' }}>{title}</h1>
-      <p style={{ color: '#666' }}>Coming soon.</p>
-    </main>
+    <header className="nav">
+      <div className="container nav-inner">
+        <NavLink to="/" className="brand" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <span className="brand-mark">
+            <Link2 size={18} />
+          </span>
+          Felon Connect
+        </NavLink>
+
+        <button
+          className="nav-toggle"
+          aria-label="Toggle menu"
+          onClick={() => setOpen((o) => !o)}
+        >
+          {open ? <X size={18} /> : <Menu size={18} />}
+        </button>
+
+        <nav className={`nav-links ${open ? '' : 'closed'}`}>
+          {nav.map(({ to, label, Icon }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={to === '/'}
+              onClick={() => setOpen(false)}
+              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+            >
+              <Icon size={15} />
+              {label}
+            </NavLink>
+          ))}
+        </nav>
+      </div>
+    </header>
+  )
+}
+
+function Footer() {
+  return (
+    <footer style={{ borderTop: '1px solid var(--border)' }}>
+      <div className="container footer">
+        <span>© {new Date().getFullYear()} Felon Connect · Reentry support, built with dignity.</span>
+        <span>Made for second chances.</span>
+      </div>
+    </footer>
   )
 }
 
 export default function App() {
   return (
     <BrowserRouter>
-      <nav style={{
-        display: 'flex', gap: '1rem', padding: '0.75rem 1.5rem',
-        borderBottom: '1px solid #e5e7eb', background: '#fff',
-      }}>
-        <span style={{ fontWeight: 700, marginRight: 'auto', color: '#1d4ed8' }}>Felon Connect</span>
-        {nav.map(({ to, label, Icon }) => (
-          <NavLink
-            key={to}
-            to={to}
-            end={to === '/'}
-            style={({ isActive }) => ({
-              display: 'flex', alignItems: 'center', gap: '0.3rem',
-              textDecoration: 'none', fontSize: '0.875rem',
-              color: isActive ? '#1d4ed8' : '#374151',
-              fontWeight: isActive ? 600 : 400,
-            })}
-          >
-            <Icon size={15} />
-            {label}
-          </NavLink>
-        ))}
-      </nav>
-
+      <Nav />
       <Routes>
-        <Route path="/"          element={<Placeholder title="Welcome to Felon Connect" />} />
-        <Route path="/jobs"      element={<Placeholder title="Job Board" />} />
-        <Route path="/resources" element={<Placeholder title="Resources" />} />
-        <Route path="/community" element={<Placeholder title="Community" />} />
-        <Route path="/legal"     element={<Placeholder title="Legal Support" />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/jobs" element={<JobsPage />} />
+        <Route path="/resources" element={<ResourcesPage />} />
+        <Route path="/community" element={<CommunityPage />} />
+        <Route path="/legal" element={<LegalPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
