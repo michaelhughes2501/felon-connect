@@ -11,6 +11,7 @@ import {
   Sparkles,
   ShieldCheck,
   HandHeart,
+  type LucideIcon,
 } from 'lucide-react'
 import { jobs, resources, posts, legalSteps } from './data'
 
@@ -128,7 +129,7 @@ function FeatureCard({
   desc,
 }: {
   to: string
-  Icon: typeof Briefcase
+  Icon: LucideIcon
   title: string
   desc: string
 }) {
@@ -206,9 +207,9 @@ export function ResourcesPage() {
             <h3>{r.title}</h3>
             <p>{r.desc}</p>
             <div style={{ marginTop: '0.9rem' }}>
-              <span className="btn btn-ghost" style={{ padding: '0.45rem 0.8rem', fontSize: '0.82rem' }}>
+              <button className="btn btn-ghost" style={{ padding: '0.45rem 0.8rem', fontSize: '0.82rem' }}>
                 Learn more <ArrowRight size={14} />
-              </span>
+              </button>
             </div>
           </article>
         ))}

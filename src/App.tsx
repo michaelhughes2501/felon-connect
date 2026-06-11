@@ -26,6 +26,7 @@ function Nav() {
         <button
           className="nav-toggle"
           aria-label="Toggle menu"
+          aria-expanded={open}
           onClick={() => setOpen((o) => !o)}
         >
           {open ? <X size={18} /> : <Menu size={18} />}
