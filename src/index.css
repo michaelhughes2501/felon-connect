@@ -28,6 +28,13 @@ textarea {
   font-family: inherit;
 }
 
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
 html,
 body,
 #root {
