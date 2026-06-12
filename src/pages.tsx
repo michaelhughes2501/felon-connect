@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import {
+import {
   ArrowRight,
   Briefcase,
   BookOpen,
@@ -11,7 +12,7 @@ import {
   Sparkles,
   ShieldCheck,
   HandHeart,
-  type LucideIcon,
+  LucideIcon,
 } from 'lucide-react'
 import { jobs, resources, posts, legalSteps } from './data'
 
