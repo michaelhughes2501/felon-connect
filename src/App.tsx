@@ -24,7 +24,6 @@ function Nav() {
         </NavLink>
 
         <button
-        <button
           className="nav-toggle"
           aria-label="Toggle menu"
           aria-expanded={open}
