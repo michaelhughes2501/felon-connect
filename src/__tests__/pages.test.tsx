@@ -57,12 +57,8 @@ describe('HomePage', () => {
 
   it('renders 6 feature cards', () => {
     renderWithRouter(<HomePage />)
-    const featureLinks = screen
-      .getAllByRole('link')
-      .filter((el) => el.classList.contains('card') || el.closest('.card'))
-    // At minimum the 6 feature cards should exist as links
     const cardLinks = screen.getAllByRole('link', { name: /fair-chance jobs|reentry resources|peer community|legal support|wellness|verified employers/i })
-    expect(cardLinks.length).toBeGreaterThanOrEqual(6)
+    expect(cardLinks).toHaveLength(6)
   })
 
   it('feature card "Fair-chance jobs" links to /jobs', () => {
